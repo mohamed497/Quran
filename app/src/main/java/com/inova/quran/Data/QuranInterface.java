@@ -4,6 +4,7 @@ import com.inova.quran.pojo.DataResponse;
 import com.inova.quran.pojo.ListeningResponse;
 
 import io.reactivex.Single;
+import okhttp3.ResponseBody;
 import retrofit2.http.GET;
 
 /**
@@ -13,4 +14,7 @@ public interface QuranInterface {
 
     @GET("quran-uthmani")
     public Single<ListeningResponse> getData();
+
+    @GET("ayah/ar.alafasy/262")
+    public Single<ResponseBody> downloadAudio();
 }

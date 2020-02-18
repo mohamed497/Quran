@@ -1,12 +1,17 @@
 package com.inova.quran.ui;
 
 import android.content.Context;
+import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
+import com.inova.quran.AyahActivity;
 import com.inova.quran.R;
+import com.inova.quran.ViewPager.DownloadingActivity;
 import com.inova.quran.pojo.SurahModel;
 
 import java.util.List;
@@ -34,8 +39,30 @@ public class QuranAdapter extends RecyclerView.Adapter<QuranAdapter.QuranViewHol
     @Override
     public void onBindViewHolder(@NonNull QuranViewHolder holder, int position) {
 
-        SurahModel surah = surahModels.get(position);
-        holder.surahText.setText(surah.getEnglishName());
+        final SurahModel surah = surahModels.get(position);
+        holder.surahText.setText(surah.getName());
+
+        holder.surahText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, AyahActivity.class);
+                for (int i= 0; i<surah.ayahs.size(); i++){
+                    intent.putExtra("TEXT", surah.ayahs.get(i).getText());
+                    intent.putExtra("SURAH", surah);
+                    Log.d("zxc", "ALL : "+surah.ayahs.get(i).getText());
+                }
+                context.startActivity(intent);
+            }
+        });
+
+        holder.quarnBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, DownloadingActivity.class);
+                intent.putExtra("TRY", surah);
+                context.startActivity(intent);
+            }
+        });
 
     }
 
@@ -44,17 +71,19 @@ public class QuranAdapter extends RecyclerView.Adapter<QuranAdapter.QuranViewHol
         return surahModels.size();
     }
 
+
     public void setList(List<SurahModel> surahModel){
         this.surahModels = surahModel;
         notifyDataSetChanged();
     }
 
     public class QuranViewHolder extends RecyclerView.ViewHolder {
-
+        Button quarnBtn;
         TextView surahText;
 
         public QuranViewHolder(@NonNull View itemView) {
             super(itemView);
+            quarnBtn = itemView.findViewById(R.id.btn_download);
             surahText = itemView.findViewById(R.id.quran_id);
         }
     }

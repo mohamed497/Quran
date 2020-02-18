@@ -1,14 +1,21 @@
 package com.inova.quran.pojo;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * Created by Alaa Moaataz on 2020-02-17.
  */
-public class AyahModel {
+public class AyahModel implements Parcelable {
 
    private int number;
-   private  String text;
+   private String text;
    private int numberInSurah;
    private int page;
+
+    public AyahModel(String text) {
+        this.text = text;
+    }
 
     public int getNumber() {
         return number;
@@ -41,4 +48,36 @@ public class AyahModel {
     public void setPage(int page) {
         this.page = page;
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(number);
+        dest.writeString(text);
+        dest.writeInt(numberInSurah);
+        dest.writeInt(page);
+    }
+
+    protected AyahModel(Parcel in){
+        this.number = in.readInt();
+        this.text = in.readString();
+        this.numberInSurah = in.readInt();
+        this.page = in.readInt();
+    }
+
+    public static final Parcelable.Creator<AyahModel> CREATOR = new Parcelable.Creator<AyahModel>() {
+        @Override
+        public AyahModel createFromParcel(Parcel source) {
+            return new AyahModel(source);
+        }
+
+        @Override
+        public AyahModel[] newArray(int size) {
+            return new AyahModel[size];
+        }
+    };
 }

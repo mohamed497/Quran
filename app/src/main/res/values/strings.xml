@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">Quran</string>
+    <string name="download">Download</string>
+    <string name="cancel">Cancel</string>
+    <string name="start">Start</string>
+    <string name="pause">PAUSE</string>
+    <string name="resume">Resume</string>
+    <string name="completed">Completed</string>
+    <string name="some_error_occurred">SOME ERROR OCCURRED !!</string>
 </resources>

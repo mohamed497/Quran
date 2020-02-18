@@ -22,7 +22,7 @@ import io.reactivex.schedulers.Schedulers;
  */
 public class QuranViewModel extends ViewModel {
 
-    public MutableLiveData<List<SurahModel>> surahMutableLiveData = new MutableLiveData<>();;
+    public MutableLiveData<List<SurahModel>> surahMutableLiveData = new MutableLiveData<>();
     QuranInterface quranInterface;
 //    Repo repo  = new Repo(new QuranClient().getApi());
 
