@@ -3,6 +3,8 @@ package com.inova.quran.pojo;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import androidx.annotation.Nullable;
+
 /**
  * Created by Alaa Moaataz on 2020-02-17.
  */
@@ -80,4 +82,19 @@ public class AyahModel implements Parcelable {
             return new AyahModel[size];
         }
     };
+
+    @Override
+    public boolean equals(@Nullable Object obj) {
+
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        AyahModel other = (AyahModel) obj;
+        if (number != other.number)
+            return false;
+        return true;
+    }
 }
