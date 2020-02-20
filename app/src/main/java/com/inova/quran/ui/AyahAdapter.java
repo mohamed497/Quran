@@ -45,7 +45,7 @@ public class AyahAdapter extends RecyclerView.Adapter<AyahAdapter.AyahViewHolder
     private String dirPath;
     private int downloadIdOne;
     private final String URL1 = "http://cdn.alquran.cloud/media/audio/ayah/ar.alafasy/";
-    private int flag;
+    public int flag;
 
 
     public static final String PREFS_NAME = "PRODUCT_APP";
@@ -105,6 +105,8 @@ public class AyahAdapter extends RecyclerView.Adapter<AyahAdapter.AyahViewHolder
                                 startDownloading(URL);
                                 //\\//\\
                                 flag = 0;
+                                addAllAyah(context, ayahModel);
+                                addToDownloading(context, ayahModel);
                             }
                         }).setOnPauseListener(new OnPauseListener() {
                             @Override
@@ -114,7 +116,7 @@ public class AyahAdapter extends RecyclerView.Adapter<AyahAdapter.AyahViewHolder
                             }
                         }).setOnCancelListener(new OnCancelListener() {
                             @Override
-                            public void onCancel() {  // flag = 3
+                            public void onCancel() {  // flag = 2
                                 holder.buttonOne.setText(R.string.start);
                                 holder.buttonCancelOne.setEnabled(false);
                                 holder.progressBarOne.setProgress(0);
@@ -122,7 +124,10 @@ public class AyahAdapter extends RecyclerView.Adapter<AyahAdapter.AyahViewHolder
                                 downloadIdOne = 0;
                                 holder.progressBarOne.setIndeterminate(false);
                                 //\\//\\
-                                flag = 3;
+                                flag = 2;
+                                removeFromALL(context, ayahModel);
+                                removeFromDownloaded(context, ayahModel);
+                                removeFromDownloading(context, ayahModel);
                             }
                         }).setOnProgressListener(new OnProgressListener() {
                             @Override
@@ -140,6 +145,14 @@ public class AyahAdapter extends RecyclerView.Adapter<AyahAdapter.AyahViewHolder
                                 holder.buttonOne.setText(R.string.completed);
                                 //\\//\\
                                 flag = 1;
+                                if (checkAllItem(ayahModel)){
+                                    Toast.makeText(context, "Ayah already downloaded ", Toast.LENGTH_SHORT).show();
+                                }
+                                else{
+                                    addAllAyah(context, ayahModel);
+                                }
+                                addDownloadedAyah(context, ayahModel);
+                                removeFromDownloading(context, ayahModel);
                             }
 
                             @Override
@@ -153,43 +166,43 @@ public class AyahAdapter extends RecyclerView.Adapter<AyahAdapter.AyahViewHolder
                                 holder.buttonCancelOne.setEnabled(false);
                                 holder.progressBarOne.setIndeterminate(false);
                                 holder.buttonOne.setEnabled(true);
+                                flag = 2;
                             }
                         });
-                if (flag == 0){ // add all , add downloading
-
-                    if (checkAllItem(ayahModel)){
-                        Toast.makeText(context, "Ayah already downloaded ", Toast.LENGTH_SHORT).show();
-                    }
-                    else {
-                        addAllAyah(context,ayahModel);
-                    }
-                    if (checkDownloadingItem(ayahModel)){
-                        Toast.makeText(context, "Ayah already downloaded ", Toast.LENGTH_SHORT).show();
-                    }else{
-                        addToDownloading(context,ayahModel);
-                    }
-                }else if (flag == 1){ // add all , add downloaded , remove downloading
-
-
-                    if (checkAllItem(ayahModel)){
-                        Toast.makeText(context, "Ayah already downloaded ", Toast.LENGTH_SHORT).show();
-                    }
-                    else {
-                        addAllAyah(context,ayahModel);
-                    }
-                    if (checkDownloadedItem(ayahModel)){
-                        Toast.makeText(context, "Ayah already downloaded ", Toast.LENGTH_SHORT).show();
-                    }
-                    else {
-                        addDownloadedAyah(context, ayahModel);
-                    }
-                    removeFromDownloading(context, ayahModel);
-
-                }else { // remove from all , downloading , downloaded
-                    removeFromDownloading(context, ayahModel);
-                    removeFromALL(context, ayahModel);
-                    removeFromDownloaded(context, ayahModel);
-                }
+//                if (flag == 0){ // add all , add downloading
+//
+//                    if (checkAllItem(ayahModel)){
+//                        Toast.makeText(context, "Ayah already downloaded ", Toast.LENGTH_SHORT).show();
+//                    }
+//                    else {
+//                        addAllAyah(context,ayahModel);
+//                    }
+//                    if (checkDownloadingItem(ayahModel)){
+//                        Toast.makeText(context, "Ayah already downloaded ", Toast.LENGTH_SHORT).show();
+//                    }else{
+//                        addToDownloading(context,ayahModel);
+//                    }
+//                }else if (flag == 1){ // add all , add downloaded , remove downloading
+//
+//                    if (checkAllItem(ayahModel)){
+//                        Toast.makeText(context, "Ayah already downloaded ", Toast.LENGTH_SHORT).show();
+//                    }
+//                    else {
+//                        addAllAyah(context,ayahModel);
+//                    }
+//                    if (checkDownloadedItem(ayahModel)){
+//                        Toast.makeText(context, "Ayah already downloaded ", Toast.LENGTH_SHORT).show();
+//                    }
+//                    else {
+//                        addDownloadedAyah(context, ayahModel);
+//                    }
+//                    removeFromDownloading(context, ayahModel);
+//
+//                }else { // remove from all , downloading , downloaded
+//                    removeFromDownloading(context, ayahModel);
+//                    removeFromALL(context, ayahModel);
+//                    removeFromDownloaded(context, ayahModel);
+//                }
             }
         });
         holder.buttonCancelOne.setOnClickListener(new View.OnClickListener() {
@@ -258,7 +271,6 @@ public class AyahAdapter extends RecyclerView.Adapter<AyahAdapter.AyahViewHolder
         TextView ayahText,textViewProgressOne;
         Button buttonOne,buttonCancelOne;
         ProgressBar progressBarOne;
-
 
 
         public AyahViewHolder(@NonNull View itemView) {

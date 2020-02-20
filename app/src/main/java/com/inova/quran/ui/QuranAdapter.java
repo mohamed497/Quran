@@ -55,14 +55,14 @@ public class QuranAdapter extends RecyclerView.Adapter<QuranAdapter.QuranViewHol
             }
         });
 
-        holder.quarnBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(context, DownloadingActivity.class);
-                intent.putExtra("TRY", surah);
-                context.startActivity(intent);
-            }
-        });
+//        holder.quarnBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(context, DownloadingActivity.class);
+//                intent.putExtra("TRY", surah);
+//                context.startActivity(intent);
+//            }
+//        });
 
     }
 
@@ -83,7 +83,7 @@ public class QuranAdapter extends RecyclerView.Adapter<QuranAdapter.QuranViewHol
 
         public QuranViewHolder(@NonNull View itemView) {
             super(itemView);
-            quarnBtn = itemView.findViewById(R.id.btn_download);
+//            quarnBtn = itemView.findViewById(R.id.btn_download);
             surahText = itemView.findViewById(R.id.quran_id);
         }
     }

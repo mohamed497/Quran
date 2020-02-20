@@ -43,19 +43,20 @@ public class DownloadedFragment extends Fragment {
         ayahAdapter = new AyahAdapter();
 
 //        ayahModels = ayahAdapter.getDownloadedAyahs(getContext());
-        ayahModels = ayahAdapter.getAllAyahs(getContext());
+        ayahModels = ayahAdapter.getDownloadedAyahs(getContext());
         if (ayahModels != null){
             Log.d("zxc", "NAME OF Downloaded AYAH : "+ayahModels.get(0).getText());
-        }
-        for (int i= 0 ; i<ayahModels.size(); i++){
-            if (ayahModels.get(i) != null){
-                String name = ayahModels.get(i).getText();
-                ayahlList.add(new AyahModel(name));
-                downloadedAyahAdapter = new DownloadedAyahAdapter();
-                downloadedAyahAdapter.setList(ayahlList);
-                recyclerView.setAdapter(downloadedAyahAdapter);
+            for (int i= 0 ; i<ayahModels.size(); i++){
+                if (ayahModels.get(i) != null){
+                    String name = ayahModels.get(i).getText();
+                    ayahlList.add(new AyahModel(name));
+                    downloadedAyahAdapter = new DownloadedAyahAdapter();
+                    downloadedAyahAdapter.setList(ayahlList);
+                    recyclerView.setAdapter(downloadedAyahAdapter);
+                }
             }
         }
+
 
         return view;
     }

@@ -25,53 +25,69 @@ import com.inova.quran.pojo.AyahModel;
 import com.inova.quran.tryDownload.Utils;
 import com.inova.quran.ui.AyahAdapter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 /**
  * Created by Alaa Moaataz on 2020-02-18.
  */
 public class DownloadingFragment extends Fragment {
 
-    private Button buttonOne,buttonCancelOne;
-    private TextView textViewProgressOne,downloadingSurah;
-    private ProgressBar progressBarOne;
-    private int downloadIdOne;
-    private static String dirPath;
-    private final String URL1 = "http://cdn.alquran.cloud/media/audio/ayah/ar.alafasy/319";
+//    private Button buttonOne,buttonCancelOne;
+//    private TextView textViewProgressOne,downloadingSurah;
+//    private ProgressBar progressBarOne;
+//    private int downloadIdOne;
+//    private static String dirPath;
+//    private final String URL1 = "http://cdn.alquran.cloud/media/audio/ayah/ar.alafasy/319";
 
     private AyahAdapter ayahAdapter;
     private List<AyahModel> ayahModels;
-
-
+    private List<AyahModel> ayahlList;
+    DownloadedAyahAdapter downloadedAyahAdapter;
+    RecyclerView recyclerView;
+    AllAyahAdapter allAyahAdapter;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_downloading, container, false);
+
+        ayahlList = new ArrayList<>();
+        recyclerView = view.findViewById(R.id.downloading_recycler);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView.setHasFixedSize(true);
+
         ayahAdapter = new AyahAdapter();
-        ayahAdapter.getDownloadingAyahs(getContext());
-        ayahModels = ayahAdapter.getAllAyahs(getContext());
-        if (ayahAdapter.getAllAyahs(getContext()) != null){
-            Log.d("zxc", "NAME OF downloading AYAH : "+ayahModels.get(0).getText());
+        ayahModels = ayahAdapter.getDownloadingAyahs(getContext());
+//        if (ayahModels != null){
+//            Log.d("zxc", "NAME OF downloading AYAH : "+ayahModels.get(0).getText());
+//        }
+
+        if (ayahModels != null && ayahModels.size()>0){
+            Log.d("zxc", "NAME OF Downloading AYAH : "+ayahModels.get(0).getText());
+            for (int i= 0 ; i<ayahModels.size(); i++){
+                if (ayahModels.get(i) != null && ayahAdapter.flag == 0){
+                    String name = ayahModels.get(i).getText();
+                    ayahlList.add(new AyahModel(name));
+                    downloadedAyahAdapter = new DownloadedAyahAdapter();
+                    downloadedAyahAdapter.setList(ayahlList);
+                    recyclerView.setAdapter(downloadedAyahAdapter);
+//                    allAyahAdapter = new AllAyahAdapter();
+//                    allAyahAdapter.setList(ayahlList);
+//                    recyclerView.setAdapter(ayahAdapter);
+                }
+                else{
+                    ayahAdapter.removeFromDownloading(getContext(),ayahModels.get(i));
+                }
+            }
         }
-//        buttonOne = view.findViewById(R.id.button_One);
-//        buttonCancelOne = view.findViewById(R.id.button_CancelOne);
-//        textViewProgressOne = view.findViewById(R.id.textViewProgressOne);
-//        downloadingSurah = view.findViewById(R.id.downloading_surah);
-//        progressBarOne = view.findViewById(R.id.progressBarOne);
 
-//        DownloadingActivity activity = (DownloadingActivity) getActivity();
-//        String myDataFromActivity = activity.getMyData();
-//        downloadingSurah.setText(myDataFromActivity);
-//
-//        dirPath = Utils.getRootDirPath(view.getContext());
-
-
-//        onClickListenerOne();
 
 
 

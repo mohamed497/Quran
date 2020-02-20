@@ -35,13 +35,13 @@ public class DownloadingActivity extends AppCompatActivity {
         TabLayout tabLayout = findViewById(R.id.tab_LayOut);
         tabLayout.setupWithViewPager(mViewPager);
 
-        Intent intent = getIntent();
-        if(intent != null){
-            surahModel = intent.getParcelableExtra("TRY");
-            String x = surahModel.getEnglishName();
-            surahName = surahModel.getName();
-            Log.d("zxc", "NNNN "+x);
-        }
+//        Intent intent = getIntent();
+//        if(intent != null){
+//            surahModel = intent.getParcelableExtra("TRY");
+//            String x = surahModel.getEnglishName();
+//            surahName = surahModel.getName();
+//            Log.d("zxc", "NNNN "+x);
+//        }
 
     }
 
