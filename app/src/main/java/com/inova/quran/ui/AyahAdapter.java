@@ -146,7 +146,7 @@ public class AyahAdapter extends RecyclerView.Adapter<AyahAdapter.AyahViewHolder
                                 //\\//\\
                                 flag = 1;
                                 if (checkAllItem(ayahModel)){
-                                    Toast.makeText(context, "Ayah already downloaded ", Toast.LENGTH_SHORT).show();
+//                                    Toast.makeText(context, "Ayah already downloaded ", Toast.LENGTH_SHORT).show();
                                 }
                                 else{
                                     addAllAyah(context, ayahModel);

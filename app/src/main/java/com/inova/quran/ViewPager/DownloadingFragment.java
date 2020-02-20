@@ -75,12 +75,12 @@ public class DownloadingFragment extends Fragment {
                 if (ayahModels.get(i) != null && ayahAdapter.flag == 0){
                     String name = ayahModels.get(i).getText();
                     ayahlList.add(new AyahModel(name));
-                    downloadedAyahAdapter = new DownloadedAyahAdapter();
-                    downloadedAyahAdapter.setList(ayahlList);
-                    recyclerView.setAdapter(downloadedAyahAdapter);
-//                    allAyahAdapter = new AllAyahAdapter();
-//                    allAyahAdapter.setList(ayahlList);
-//                    recyclerView.setAdapter(ayahAdapter);
+//                    downloadedAyahAdapter = new DownloadedAyahAdapter();
+//                    downloadedAyahAdapter.setList(ayahlList);
+//                    recyclerView.setAdapter(downloadedAyahAdapter);
+                    allAyahAdapter = new AllAyahAdapter();
+                    allAyahAdapter.setList(ayahlList);
+                    recyclerView.setAdapter(allAyahAdapter);
                 }
                 else{
                     ayahAdapter.removeFromDownloading(getContext(),ayahModels.get(i));

@@ -52,6 +52,7 @@ public class DownloadedFragment extends Fragment {
                     ayahlList.add(new AyahModel(name));
                     downloadedAyahAdapter = new DownloadedAyahAdapter();
                     downloadedAyahAdapter.setList(ayahlList);
+
                     recyclerView.setAdapter(downloadedAyahAdapter);
                 }
             }
