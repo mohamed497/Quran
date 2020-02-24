@@ -17,6 +17,7 @@ import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.functions.BiConsumer;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
+import retrofit2.HttpException;
 
 /**
  * Created by Alaa Moaataz on 2020-02-17.
@@ -47,8 +48,10 @@ public class QuranViewModel extends ViewModel {
                            }, new Consumer<Throwable>() {
                                @Override
                                public void accept(Throwable throwable) throws Exception {
-                                   Log.d("null",throwable.getMessage());
-
+                                   if (throwable instanceof HttpException)
+                                       Log.d("null",throwable.getMessage() + ((HttpException) throwable).code());
+                                   else
+                                       Log.d("null",throwable.getMessage());
                                }
                            }
 //                        new BiConsumer<List<SurahModel>, Throwable>() {

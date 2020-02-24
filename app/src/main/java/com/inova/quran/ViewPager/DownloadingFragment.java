@@ -46,6 +46,8 @@ public class DownloadingFragment extends Fragment {
 //    private static String dirPath;
 //    private final String URL1 = "http://cdn.alquran.cloud/media/audio/ayah/ar.alafasy/319";
 
+
+
     private AyahAdapter ayahAdapter;
     private List<AyahModel> ayahModels;
     private List<AyahModel> ayahlList;

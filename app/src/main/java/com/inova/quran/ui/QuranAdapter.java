@@ -61,7 +61,7 @@ public class QuranAdapter extends RecyclerView.Adapter<QuranAdapter.QuranViewHol
 
         final SurahModel surah = surahModels.get(position);
 
-        dirPath = Utils.getRootDirPath(context);
+//        dirPath = Utils.getRootDirPath(context);
 
 //        final String URL = URL1+surah.ayahs.get(0).getNumberInSurah();
         dirPath = Utils.getRootDirPath(context);
@@ -204,12 +204,16 @@ public class QuranAdapter extends RecyclerView.Adapter<QuranAdapter.QuranViewHol
 //            }
 //        });
 
-        for (i = 0; i<surah.ayahs.size(); i++){
-            final String URL = URL1+surah.ayahs.get(i).getNumberInSurah();
+
 
             holder.buttonOne.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+
+                    for (i = 0; i<surah.ayahs.size()-1; i++){
+//                        Log.d("zxc", surah.ayahs.)
+                        downloadIdOne = 0;
+                        final String URL = URL1+surah.ayahs.get(i).getNumberInSurah();
                     if (Status.RUNNING == PRDownloader.getStatus(downloadIdOne)) {
                         PRDownloader.pause(downloadIdOne);
                         return;
@@ -234,7 +238,7 @@ public class QuranAdapter extends RecyclerView.Adapter<QuranAdapter.QuranViewHol
                                     holder.buttonOne.setText(R.string.pause);
                                     holder.buttonCancelOne.setEnabled(true);
                                     //\\//\\
-                                    startDownloading(URL);
+//                                    startDownloading(URL);
                                     //\\//\\
 
                                     ayahAdapter.addAllAyah(context, surah.ayahs.get(i));
@@ -264,8 +268,12 @@ public class QuranAdapter extends RecyclerView.Adapter<QuranAdapter.QuranViewHol
                             }).setOnProgressListener(new OnProgressListener() {
                                 @Override
                                 public void onProgress(Progress progress) {
+
+                                    //progress loading line
                                     long progressPercent = progress.currentBytes * 100 / progress.totalBytes;
                                     holder.progressBarOne.setProgress((int) progressPercent);
+
+                                    // to get file size
                                     holder.textViewProgressOne.setText(Utils.getProgressDisplayLine(progress.currentBytes, progress.totalBytes));
                                     holder.progressBarOne.setIndeterminate(false);
                                 }
@@ -292,6 +300,7 @@ public class QuranAdapter extends RecyclerView.Adapter<QuranAdapter.QuranViewHol
                                     holder.buttonOne.setText(R.string.start);
 //                               Toast.makeText(context, error.getServerErrorMessage(), Toast.LENGTH_SHORT).show();
                                     Toast.makeText(context, context.getString(R.string.some_error_occurred) + " " + "1", Toast.LENGTH_SHORT).show();
+                                    error.getServerErrorMessage();
                                     holder.textViewProgressOne.setText("");
                                     holder.progressBarOne.setProgress(0);
                                     downloadIdOne = 0;
@@ -334,7 +343,7 @@ public class QuranAdapter extends RecyclerView.Adapter<QuranAdapter.QuranViewHol
 //                    removeFromALL(context, ayahModel);
 //                    removeFromDownloaded(context, ayahModel);
 //                }
-                }
+                }}
             });
             holder.buttonCancelOne.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -343,7 +352,7 @@ public class QuranAdapter extends RecyclerView.Adapter<QuranAdapter.QuranViewHol
                 }
             });
 
-        }
+//        }
 //        holder.surahText.setText(surah.getName());
 //
         holder.ayahText.setOnClickListener(new View.OnClickListener() {

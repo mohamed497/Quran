@@ -14,6 +14,7 @@ import android.widget.Button;
 import com.inova.quran.R;
 import com.inova.quran.ViewPager.DownloadingActivity;
 import com.inova.quran.pojo.SurahModel;
+import com.inova.quran.tryDownload.DownloadService;
 
 import java.util.List;
 
@@ -56,5 +57,15 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+//        Intent intent = new Intent(MainActivity.this, DownloadService.class);
+//        startService(intent);
+
+//        bindService(intent, )
     }
 }

@@ -8,13 +8,11 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".ViewPager.DownloadingActivity">
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true">
+        <activity android:name=".ViewPager.DownloadingActivity"></activity>
 
-        </activity>
-        <activity android:name=".tryDownload.DownloadActivity">
-
-        </activity>
+        <activity android:name=".tryDownload.DownloadActivity"></activity>
         <activity android:name=".AyahActivity" />
         <activity android:name=".ui.MainActivity">
             <intent-filter>
@@ -23,9 +21,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <service
+            android:name=".tryDownload.DownloadService"
+            android:enabled="true"
+            android:exported="true"></service>
     </application>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
-    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
 
 </manifest>

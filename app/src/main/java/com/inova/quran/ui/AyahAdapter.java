@@ -25,6 +25,7 @@ import com.downloader.Progress;
 import com.downloader.Status;
 import com.google.gson.Gson;
 import com.inova.quran.R;
+import com.inova.quran.ViewPager.AllAyahAdapter;
 import com.inova.quran.pojo.AyahModel;
 import com.inova.quran.pojo.SurahModel;
 import com.inova.quran.tryDownload.Utils;
@@ -43,9 +44,13 @@ public class AyahAdapter extends RecyclerView.Adapter<AyahAdapter.AyahViewHolder
     private List<AyahModel> ayahModels;
     private Context context;
     private String dirPath;
-    private int downloadIdOne;
+    public int downloadIdOne;
     private final String URL1 = "http://cdn.alquran.cloud/media/audio/ayah/ar.alafasy/";
     public int flag;
+
+    //00
+    public static final String PREFS_NAME_ID = "PRODUCT_APP_ID";
+    public static final String FAVORITES_ID = "Product_Favorite_ID";
 
 
     public static final String PREFS_NAME = "PRODUCT_APP";
@@ -57,6 +62,9 @@ public class AyahAdapter extends RecyclerView.Adapter<AyahAdapter.AyahViewHolder
     public static final String PREFS_NAME3 = "PRODUCT_APP3";
     public static final String FAVORITES3 = "Product_Favorite3";
 
+//    AllAyahAdapter allAyahAdapter = new AllAyahAdapter();
+
+//    AllAyahAdapter allAyahAdapter = new AllAyahAdapter();
     @NonNull
     @Override
     public AyahViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -67,6 +75,8 @@ public class AyahAdapter extends RecyclerView.Adapter<AyahAdapter.AyahViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull final AyahViewHolder holder, int position) {
+
+//        allAyahAdapter.flag = 0;
 
         final AyahModel ayahModel = ayahModels.get(position);
         holder.ayahText.setText(ayahModel.getText()+" "+ ayahModel.getNumberInSurah());
@@ -102,11 +112,15 @@ public class AyahAdapter extends RecyclerView.Adapter<AyahAdapter.AyahViewHolder
                                 holder.buttonOne.setText(R.string.pause);
                                 holder.buttonCancelOne.setEnabled(true);
                                 //\\//\\
-                                startDownloading(URL);
+//                                startDownloading(URL);
                                 //\\//\\
                                 flag = 0;
                                 addAllAyah(context, ayahModel);
                                 addToDownloading(context, ayahModel);
+//                                if (allAyahAdapter.flag == 1){
+//                                    removeFromDownloading(context, ayahModel);
+//                                    addDownloadedAyah(context, ayahModel);
+//                                }
                             }
                         }).setOnPauseListener(new OnPauseListener() {
                             @Override
@@ -152,7 +166,8 @@ public class AyahAdapter extends RecyclerView.Adapter<AyahAdapter.AyahViewHolder
                                     addAllAyah(context, ayahModel);
                                 }
                                 addDownloadedAyah(context, ayahModel);
-                                removeFromDownloading(context, ayahModel);
+
+
                             }
 
                             @Override
@@ -169,6 +184,8 @@ public class AyahAdapter extends RecyclerView.Adapter<AyahAdapter.AyahViewHolder
                                 flag = 2;
                             }
                         });
+
+
 //                if (flag == 0){ // add all , add downloading
 //
 //                    if (checkAllItem(ayahModel)){
@@ -283,6 +300,75 @@ public class AyahAdapter extends RecyclerView.Adapter<AyahAdapter.AyahViewHolder
 
         }
     }
+
+
+
+    //1
+
+//    public void TryToAdd(Context context, int downloadId) {
+////        List<Integer> ayahs = getDownloadingAyahs(context);
+//        List<int> ayahsId = getDownloadId(context);
+//        if (ayahsId == null)
+//            ayahsId = new ArrayList<int>();
+//        ayahsId.add(downloadId);
+////        if (flag == 0){
+////            saveAllAyahs(context, ayahs);
+////        }else if (flag == 1){
+////
+////        }else{
+////
+////        }
+//
+//
+//        saveDownloadId(context, downloadId);
+//    }
+
+    //2
+
+//    private List<Integer> getDownloadId(Context context) {
+//
+//        SharedPreferences settings;
+//        List<int> ayahs;
+//
+//        settings = context.getSharedPreferences(PREFS_NAME_ID,
+//                Context.MODE_PRIVATE);
+//
+//        if (settings.contains(FAVORITES_ID)) {
+//            String jsonFavorites = settings.getString(FAVORITES_ID, null);
+//            Gson gson = new Gson();
+//
+//            int[] favoriteItems = gson.fromJson(jsonFavorites,
+//                    int[].class);
+//            ayahs = Arrays.asList(favoriteItems);
+//            ayahs = new ArrayList<Integer>(ayahs);
+//
+//        } else
+//            return null;
+//
+//        return (ArrayList<int>) ayahs;
+//    }
+
+    //3
+
+//    public void saveDownloadId(Context context, List<Integer> ayahs) {
+//        SharedPreferences settings;
+//        SharedPreferences.Editor editor;
+//
+//        settings = context.getSharedPreferences(PREFS_NAME_ID,
+//                Context.MODE_PRIVATE);
+//        editor = settings.edit();
+//
+//        Gson gson = new Gson();
+//        String jsonFavorites = gson.toJson(ayahs);
+//
+//        editor.putString(FAVORITES_ID, jsonFavorites);
+//
+//        editor.commit();
+//    }
+
+
+
+
 
     public void addToDownloading(Context context, AyahModel ayah) {
         List<AyahModel> ayahs = getDownloadingAyahs(context);
