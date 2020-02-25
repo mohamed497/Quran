@@ -17,18 +17,24 @@ public class AyahRoomModel {
     public String text;
     public int numberInSurah;
     public boolean state;
+    public boolean check;
+    public boolean checkPause;
     public long progressPercent;
     public String size;
 
+//
+//    public AyahRoomModel() {
+//    }
 
-    public AyahRoomModel() {
-    }
 
-    public AyahRoomModel(int number, String text, int numberInSurah, boolean state, long progressPercent, String size) {
+    public AyahRoomModel(int id, int number, String text, int numberInSurah, boolean state, boolean check, boolean checkPause, long progressPercent, String size) {
+        this.id = id;
         this.number = number;
         this.text = text;
         this.numberInSurah = numberInSurah;
         this.state = state;
+        this.check = check;
+        this.checkPause = checkPause;
         this.progressPercent = progressPercent;
         this.size = size;
     }

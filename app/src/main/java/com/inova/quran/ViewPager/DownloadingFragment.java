@@ -39,14 +39,6 @@ import androidx.recyclerview.widget.RecyclerView;
  */
 public class DownloadingFragment extends Fragment {
 
-//    private Button buttonOne,buttonCancelOne;
-//    private TextView textViewProgressOne,downloadingSurah;
-//    private ProgressBar progressBarOne;
-//    private int downloadIdOne;
-//    private static String dirPath;
-//    private final String URL1 = "http://cdn.alquran.cloud/media/audio/ayah/ar.alafasy/319";
-
-
 
     private AyahAdapter ayahAdapter;
     private List<AyahModel> ayahModels;
@@ -67,9 +59,6 @@ public class DownloadingFragment extends Fragment {
 
         ayahAdapter = new AyahAdapter();
         ayahModels = ayahAdapter.getDownloadingAyahs(getContext());
-//        if (ayahModels != null){
-//            Log.d("zxc", "NAME OF downloading AYAH : "+ayahModels.get(0).getText());
-//        }
 
         if (ayahModels != null && ayahModels.size()>0){
             Log.d("zxc", "NAME OF Downloading AYAH : "+ayahModels.get(0).getText());
@@ -89,9 +78,6 @@ public class DownloadingFragment extends Fragment {
                 }
             }
         }
-
-
-
 
         return view;
     }

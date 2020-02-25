@@ -25,11 +25,9 @@ import com.downloader.Progress;
 import com.downloader.Status;
 import com.google.gson.Gson;
 import com.inova.quran.R;
-import com.inova.quran.ViewPager.AllAyahAdapter;
 import com.inova.quran.pojo.AyahModel;
 import com.inova.quran.pojo.SurahModel;
 import com.inova.quran.tryDownload.Utils;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;

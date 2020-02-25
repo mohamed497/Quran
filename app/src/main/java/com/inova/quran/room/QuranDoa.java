@@ -18,10 +18,13 @@ public interface QuranDoa {
     @Query("SELECT * FROM Quran")
     LiveData<List<AyahRoomModel>> getAyah();
 
+    @Query("SELECT * FROM Quran WHERE state = :state AND `check` = :check")
+    LiveData<List<AyahRoomModel>> getDownloadingAyah(boolean state, boolean check);
+
 //    @Query("UPDATE Quran SET state = :state")
 //    AyahRoomModel updateAyah(boolean state);
-    @Query("UPDATE Quran SET state = :state")
-    void updateAyah(boolean state);
+    @Query("UPDATE Quran SET state = :state WHERE number = :number")
+    void updateAyah(boolean state, int number);
 
 
     @Insert(onConflict = OnConflictStrategy.REPLACE, entity = AyahRoomModel.class)
@@ -30,7 +33,7 @@ public interface QuranDoa {
 //    @Insert(onConflict = OnConflictStrategy.REPLACE, entity = AyahRoomModel.class)
 //    void insertAyah(AyahRoomModel ayahRoomModels);
 
-    @Query("DELETE FROM Quran WHERE state = :state")
-    void deleteAyah(boolean state);
+    @Query("DELETE FROM Quran WHERE state = :state AND `check` = :check")
+    void deleteAyah(boolean state, boolean check);
 
 }

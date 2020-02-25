@@ -3,6 +3,8 @@ package com.inova.quran.room;
 import android.app.Application;
 import android.os.AsyncTask;
 
+import com.inova.quran.AyahActivity;
+
 import java.util.List;
 
 import androidx.lifecycle.LiveData;
@@ -19,7 +21,9 @@ public class QuranRepo {
 
         QuranDatabase db = QuranDatabase.getDatabase(application);
         quranDoa = db.quranDoa();
-        mAllQuran = quranDoa.getAyah();
+        //\\//\\
+//        mAllQuran = quranDoa.getAyah();
+        mAllQuran = quranDoa.getDownloadingAyah(true,true);
     }
 
     LiveData<List<AyahRoomModel>> getAllAyahs() {
@@ -72,6 +76,7 @@ public class QuranRepo {
     }
     private static class updateAyahAsyncTask extends AsyncTask<Void, Void, Void> {
         private QuranDoa mAsyncTaskDao;
+        AyahActivity ayahActivity = new AyahActivity();
 
         updateAyahAsyncTask(QuranDoa dao) {
             mAsyncTaskDao = dao;
@@ -80,7 +85,8 @@ public class QuranRepo {
         @Override
         protected Void doInBackground(Void... voids) {
             //\\ //\\ //\\ boolean state
-//            mAsyncTaskDao.updateAyah();
+            if (ayahActivity.ayahRoomModels != null)
+            mAsyncTaskDao.updateAyah(true,ayahActivity.ayahRoomModels.get(0).number);
             return null;
         }
     }

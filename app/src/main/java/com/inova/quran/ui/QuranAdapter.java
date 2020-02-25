@@ -28,6 +28,7 @@ import com.inova.quran.AyahActivity;
 import com.inova.quran.R;
 import com.inova.quran.ViewPager.DownloadingActivity;
 import com.inova.quran.pojo.SurahModel;
+import com.inova.quran.room.RoomViewModel;
 import com.inova.quran.tryDownload.Utils;
 
 import java.util.List;
@@ -48,6 +49,7 @@ public class QuranAdapter extends RecyclerView.Adapter<QuranAdapter.QuranViewHol
     AyahAdapter ayahAdapter = new AyahAdapter();
     int i;
 
+
     @NonNull
     @Override
     public QuranViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -60,6 +62,7 @@ public class QuranAdapter extends RecyclerView.Adapter<QuranAdapter.QuranViewHol
     public void onBindViewHolder(@NonNull final QuranViewHolder holder, int position) {
 
         final SurahModel surah = surahModels.get(position);
+
 
 //        dirPath = Utils.getRootDirPath(context);
 

@@ -18,6 +18,7 @@ public class RoomViewModel extends AndroidViewModel {
     private LiveData<List<AyahRoomModel>> mAllAyahs;
 
 
+
     public RoomViewModel(@NonNull Application application) {
         super(application);
         quranRepo = new QuranRepo(application);
@@ -36,7 +37,7 @@ public class RoomViewModel extends AndroidViewModel {
         quranRepo.update();
     }
 
-    public void delte(){
+    public void delete(){
         quranRepo.deleteAyah();
     }
 
